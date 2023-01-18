@@ -1,9 +1,54 @@
 package it.italiandudes.easy_sheet;
 
-public final class EasySheet {
+import it.italiandudes.easy_sheet.javafx.JFXDefs;
+import it.italiandudes.easy_sheet.javafx.scene.SceneStartup;
+import it.italiandudes.idl.common.Logger;
+import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.IOException;
+
+public final class EasySheet extends Application {
+
+    //Attributes
+    private static Stage stage = null;
+
+    //Start Method
+    @Override
+    public void start(Stage stage) {
+        EasySheet.stage = stage;
+        stage.setTitle(JFXDefs.AppInfo.NAME);
+        stage.getIcons().add(JFXDefs.AppInfo.LOGO);
+        stage.setScene(SceneStartup.getScene());
+        stage.show();
+    }
+
+    //Methods
+    @NotNull
+    public static Stage getStage(){
+        return stage;
+    }
+
+    //Main Method
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        try {
+            if (Logger.init()) {
+                Runtime.getRuntime().addShutdownHook(new Thread(Logger::close));
+            }
+        }catch (IOException e){
+            System.err.println("Logger can't be initialized. Exit...");
+        }
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> Logger.log(e));
+        launch(args);
+    }
+
+    //Defs
+    public static final class Defs {
+        //This Jar Executable Location
+        public static final File JAR_EXECUTABLE_PATH = new File(EasySheet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
     }
 
 }

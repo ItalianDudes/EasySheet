@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane id="sceneStartupMainPanel" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="121.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.italiandudes.easy_sheet.javafx.controller.ControllerSceneStartup">
+   <bottom>
+      <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="350.0" text="Apri la Scheda" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <BorderPane prefHeight="75.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+         <right>
+            <Button fx:id="fileChooserButton" mnemonicParsing="false" onAction="#openSheetFileChooser" prefHeight="20.0" prefWidth="20.0" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <TextField fx:id="pathSheetTextField" onDragDropped="#handleOnDragDropped" onDragOver="#handleOnDragOver" prefHeight="20.0" BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+            <Label text="Inserisci il percorso alla Scheda" wrapText="true" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+         </top></BorderPane>
+   </center>
+   <padding>
+      <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+   </padding>
+</BorderPane>
