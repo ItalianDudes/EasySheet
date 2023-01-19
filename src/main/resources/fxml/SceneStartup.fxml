@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<BorderPane id="sceneStartupMainPanel" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="121.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.italiandudes.easy_sheet.javafx.controller.ControllerSceneStartup">
+<?import javafx.scene.text.Font?>
+<BorderPane id="sceneStartupMainPanel" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.italiandudes.easy_sheet.javafx.controller.ControllerSceneStartup">
    <bottom>
-      <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="350.0" text="Apri la Scheda" BorderPane.alignment="CENTER" />
+      <VBox spacing="10.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets/>
+         </BorderPane.margin>
+         <Button fx:id="openSheetButton" disable="true" mnemonicParsing="false" onAction="#openSheet" prefHeight="20.0"
+                 prefWidth="350.0" text="Apri la Scheda"/>
+         <Button fx:id="createSheetButton" disable="true" mnemonicParsing="false" onAction="#createSheet"
+                 prefHeight="20.0" prefWidth="350.0" text="Crea la Scheda"/>
+      </VBox>
    </bottom>
    <center>
       <BorderPane prefHeight="75.0" prefWidth="350.0" BorderPane.alignment="CENTER">

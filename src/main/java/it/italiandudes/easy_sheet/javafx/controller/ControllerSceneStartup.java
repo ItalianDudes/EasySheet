@@ -8,21 +8,27 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 
+@SuppressWarnings("unused")
 public final class ControllerSceneStartup {
 
     //Attributes
 
     //Graphic Elements
+    @FXML private BorderPane mainPane;
     @FXML private TextField pathSheetTextField;
     @FXML private Button fileChooserButton;
+    @FXML private Button openSheetButton;
+    @FXML private Button createSheetButton;
 
     //Initialize
     @FXML
     private void initialize(){
+        EasySheet.getStage().setResizable(false);
         ImageView fileChooserView = new ImageView(JFXDefs.Resource.get(JFXDefs.Resource.Image.IMAGE_FILE_EXPLORER).toString());
         fileChooserView.setFitWidth(fileChooserButton.getPrefWidth());
         fileChooserView.setFitHeight(fileChooserButton.getHeight());
@@ -40,7 +46,16 @@ public final class ControllerSceneStartup {
     @FXML
     private void handleOnDragDropped(DragEvent event){
         if(event.getDragboard().hasFiles()){
-            pathSheetTextField.setText(event.getDragboard().getFiles().get(0).getAbsolutePath());
+            String path = event.getDragboard().getFiles().get(0).getAbsolutePath();
+            File fp = new File(path);
+            if(fp.exists() && fp.isFile()){
+                openSheetButton.setDisable(false);
+                createSheetButton.setDisable(true);
+            }else{
+                openSheetButton.setDisable(true);
+                createSheetButton.setDisable(false);
+            }
+            pathSheetTextField.setText(path);
             event.setDropCompleted(true);
         }else{
             event.setDropCompleted(false);
@@ -50,11 +65,27 @@ public final class ControllerSceneStartup {
     private void openSheetFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleziona la Scheda");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("D&D Sheet", "*.dndx"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("D&D Sheet", "*."+JFXDefs.AppInfo.SHEET_FILE_EXTENSION));
         fileChooser.setInitialDirectory(EasySheet.Defs.JAR_EXECUTABLE_PATH);
-        File fileDB = fileChooser.showOpenDialog(fileChooserButton.getScene().getWindow());
-        if(fileDB!=null)
-            pathSheetTextField.setText(fileDB.getAbsolutePath());
+        File fileSheet = fileChooser.showOpenDialog(fileChooserButton.getScene().getWindow());
+        if(fileSheet!=null) {
+            if(fileSheet.exists() && fileSheet.isFile()){
+                openSheetButton.setDisable(false);
+                createSheetButton.setDisable(true);
+            }else{
+                openSheetButton.setDisable(true);
+                createSheetButton.setDisable(false);
+            }
+            pathSheetTextField.setText(fileSheet.getAbsolutePath());
+        }
+    }
+    @FXML
+    private void openSheet(){
+        //TODO: openSheet()
+    }
+    @FXML
+    private void createSheet(){
+        //TODO: createSheet()
     }
 
 }

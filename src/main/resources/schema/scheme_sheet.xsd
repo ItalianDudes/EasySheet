@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="dice_roll">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="^[0-9]+d[0-9]+$"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="spell">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="level" type="xs:integer"/>
+            <xs:element name="type" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="image" type="xs:base64Binary" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ability">
+        <xs:sequence>
+            <xs:element name="id" type="xs:integer"/>
+            <xs:element name="proficiencyLevel" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="abilities">
+        <xs:sequence>
+            <xs:element name="ability" type="ability" minOccurs="18" maxOccurs="18"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="major_ability">
+        <xs:sequence>
+            <xs:element name="id" type="xs:integer"/>
+            <xs:element name="value" type="xs:integer"/>
+            <xs:element name="saving_throw_proficiency" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="character_header">
+        <xs:sequence>
+            <xs:element name="character_name" type="xs:string"/>
+            <xs:element name="character_class" type="xs:string"/>
+            <xs:element name="level" type="xs:integer"/>
+            <xs:element name="background" type="xs:string"/>
+            <xs:element name="race" type="xs:string"/>
+            <xs:element name="player_name" type="xs:string"/>
+            <xs:element name="alignment" type="xs:string"/>
+            <xs:element name="campaign" type="xs:string"/>
+            <xs:element name="exp" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="personality">
+        <xs:sequence>
+            <xs:element name="trait" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ideals">
+        <xs:sequence>
+            <xs:element name="ideal" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="bonds">
+        <xs:sequence>
+            <xs:element name="bond" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="allies_and_organizations">
+        <xs:sequence>
+            <xs:element name="ally_or_organization" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="flaws">
+        <xs:sequence>
+            <xs:element name="flaw" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="privileges_and_traits">
+        <xs:sequence>
+            <xs:element name="privilege_or_trait" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="other_proficiencies_and_languages">
+        <xs:sequence>
+            <xs:element name="proficiency" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="character_description">
+        <xs:sequence>
+            <xs:element name="personality" type="personality"/>
+            <xs:element name="flaws" type="flaws"/>
+            <xs:element name="ideals" type="ideals"/>
+            <xs:element name="bonds" type="bonds"/>
+            <xs:element name="privileges_and_traits" type="privileges_and_traits"/>
+            <xs:element name="age" type="xs:string"/>
+            <xs:element name="height" type="xs:string"/>
+            <xs:element name="weight" type="xs:string"/>
+            <xs:element name="eyes" type="xs:string"/>
+            <xs:element name="skin" type="xs:string"/>
+            <xs:element name="hair" type="xs:string"/>
+            <xs:element name="character_image" type="xs:base64Binary" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="stats">
+        <xs:sequence>
+            <xs:element name="proficiency_bonus" type="xs:integer"/>
+            <xs:element name="inspiration_bonus" type="xs:integer"/>
+            <xs:element name="major_ability" type="major_ability" minOccurs="6" maxOccurs="6"/>
+            <xs:element name="abilities" type="abilities"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="armor_class">
+        <xs:sequence>
+            <xs:element name="current_ca" type="xs:integer"/>
+            <xs:element name="natural_ca" type="xs:integer"/>
+            <xs:element name="armor_ca" type="xs:integer"/>
+            <xs:element name="shield_ca" type="xs:integer"/>
+            <xs:element name="traits_ca" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="vitality">
+        <xs:sequence>
+            <xs:element name="armor_class" type="armor_class"/>
+            <xs:element name="speed" type="xs:string"/>
+            <xs:element name="max_hp" type="xs:integer"/>
+            <xs:element name="current_hp" type="xs:integer"/>
+            <xs:element name="total_hit_dice" type="dice_roll"/>
+            <xs:element name="current_hit_dice" type="dice_roll"/>
+            <xs:element name="success_death_saving_throws" type="xs:integer"/>
+            <xs:element name="fail_death_saving_throws" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cult">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" minOccurs="0"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="image" type="xs:base64Binary" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="wallet">
+        <xs:sequence>
+            <xs:element name="copper_coins" type="xs:integer"/>
+            <xs:element name="silver_coins" type="xs:integer"/>
+            <xs:element name="electrum_coins" type="xs:integer"/>
+            <xs:element name="gold_coins" type="xs:integer"/>
+            <xs:element name="platinum_coins" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="caster_header">
+        <xs:sequence>
+            <xs:element name="caster_class" type="xs:string"/>
+            <xs:element name="caster_ability" type="xs:string"/>
+            <xs:element name="cd_spell_saving_throws" type="xs:integer"/>
+            <xs:element name="spell_attack_bonus" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="character">
+        <xs:sequence>
+            <xs:element name="character_header" type="character_header"/>
+            <xs:element name="character_description" type="character_description"/>
+            <xs:element name="stats" type="stats"/>
+            <xs:element name="vitality" type="vitality"/>
+            <xs:element name="story" type="xs:string"/>
+            <xs:element name="allies_and_organizations" type="allies_and_organizations"/>
+            <xs:element name="cult" type="cult"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="inventory">
+        <xs:sequence>
+            <xs:element name="item" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="wallet" type="wallet"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="spell_category">
+        <xs:sequence>
+            <xs:element name="caster_header" type="caster_header"/>
+            <xs:element name="spell" type="spell" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="dnd_sheet">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="character" type="character"/>
+                <xs:element name="inventory" type="inventory"/>
+                <xs:element name="spell_category" type="spell_category"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -13,6 +13,7 @@ public final class JFXDefs {
     //App Info
     public static final class AppInfo {
         public static final String NAME = "Easy Sheet";
+        public static final String SHEET_FILE_EXTENSION = "dndx";
         public static final Image LOGO = new Image(JFXDefs.Resource.get(JFXDefs.Resource.Image.IMAGE_LOGO).toString());
     }
 
@@ -32,6 +33,12 @@ public final class JFXDefs {
             private static final String FXML_DIR = "/fxml/";
             public static final String FXML_STARTUP = FXML_DIR + "SceneStartup.fxml";
             public static final String FXML_LOADING = FXML_DIR+"SceneLoading.fxml";
+        }
+
+        //XML Scheme Locations
+        public static final class XMLSchema {
+            private static final String XML_SCHEMA_DIR = "/schema/";
+            public static final String XML_SCHEMA_SHEET = XML_SCHEMA_DIR+"scheme_sheet.xsd";
         }
 
         //GIF Location
