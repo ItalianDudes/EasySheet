@@ -1,7 +1,8 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Document;
+import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
+import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
 public final class ArmorClass {
@@ -28,8 +29,12 @@ public final class ArmorClass {
         this.traitsAC = 0;
         updateTotalAC();
     }
-    public ArmorClass(@NotNull Document dndSheet){
-        //TODO: read xml sheet
+    public ArmorClass(@NotNull Element dndSheet){
+        naturalAC = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.ArmorClass.NATURAL_AC).item(0).getTextContent());
+        armorAC = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.ArmorClass.ARMOR_AC).item(0).getTextContent());
+        shieldAC = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.ArmorClass.SHIELD_AC).item(0).getTextContent());
+        traitsAC = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.ArmorClass.TRAITS_AC).item(0).getTextContent());
+        updateTotalAC();
     }
 
     //Methods

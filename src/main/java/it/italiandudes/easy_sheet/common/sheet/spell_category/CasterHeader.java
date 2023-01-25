@@ -1,8 +1,9 @@
 package it.italiandudes.easy_sheet.common.sheet.spell_category;
 
+import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
 public final class CasterHeader {
@@ -28,8 +29,12 @@ public final class CasterHeader {
         cdSpellSavingThrows = 0;
         spellAttackBonus = 0;
     }
-    public CasterHeader(@NotNull Document dndSheet){
-        //TODO: read xml sheet
+    public CasterHeader(@NotNull Element dndSheet) throws RuntimeException {
+        Element casterHeaderElement = (Element) dndSheet.getElementsByTagName(XMLElementNames.SpellCategory.CasterHeader.CASTER_HEADER).item(0);
+        casterClass = casterHeaderElement.getElementsByTagName(XMLElementNames.SpellCategory.CasterHeader.CASTER_CLASS).item(0).getTextContent();
+        casterAbility = casterHeaderElement.getElementsByTagName(XMLElementNames.SpellCategory.CasterHeader.CASTER_ABILITY).item(0).getTextContent();
+        cdSpellSavingThrows = Integer.parseInt(casterHeaderElement.getElementsByTagName(XMLElementNames.SpellCategory.CasterHeader.CD_SPELL_SAVING_THROWS).item(0).getTextContent());
+        spellAttackBonus = Integer.parseInt(casterHeaderElement.getElementsByTagName(XMLElementNames.SpellCategory.CasterHeader.SPELL_ATTACK_BONUS).item(0).getTextContent());
     }
 
     //Methods

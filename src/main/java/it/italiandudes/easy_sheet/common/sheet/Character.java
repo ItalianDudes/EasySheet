@@ -4,6 +4,7 @@ import it.italiandudes.easy_sheet.common.sheet.character.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.util.ArrayList;
 
@@ -41,7 +42,7 @@ public final class Character {
                 new ArrayList<>(),
                 new Cult());
     }
-    public Character(@NotNull Document dndSheet){
+    public Character(@NotNull Element dndSheet){
         characterHeader = null;
         characterDescription = null;
         stats = null;

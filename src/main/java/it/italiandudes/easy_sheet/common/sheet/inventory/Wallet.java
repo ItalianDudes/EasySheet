@@ -1,7 +1,8 @@
 package it.italiandudes.easy_sheet.common.sheet.inventory;
 
+import it.italiandudes.easy_sheet.EasySheet;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
 public final class Wallet {
@@ -30,8 +31,13 @@ public final class Wallet {
         this.platinumCoins = platinumCoins;
     }
 
-    public Wallet(@NotNull Document dndSheet) {
-        //TODO: read from xml
+    public Wallet(@NotNull Element dndSheet) {
+        Element walletElement = (Element) dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.WALLET).item(0);
+        copperCoins = Integer.parseInt(walletElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.COPPER_COINS).item(0).getTextContent());
+        silverCoins = Integer.parseInt(walletElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.SILVER_COINS).item(0).getTextContent());
+        electrumCoins = Integer.parseInt(walletElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.ELECTRUM_COINS).item(0).getTextContent());
+        goldCoins = Integer.parseInt(walletElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.GOLD_COINS).item(0).getTextContent());
+        platinumCoins = Integer.parseInt(walletElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.PLATINUM_COINS).item(0).getTextContent());
     }
 
     //Methods

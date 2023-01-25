@@ -8,6 +8,7 @@ import it.italiandudes.easy_sheet.javafx.JFXDefs;
 import it.italiandudes.idl.common.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
@@ -45,9 +46,10 @@ public final class Sheet {
             Logger.log(e);
             throw new RuntimeException(e);
         }
-        this.character = new Character(dndSheet);
-        this.inventory = new Inventory(dndSheet);
-        this.casterHeader = new CasterHeader(dndSheet);
+        Element rootElement = dndSheet.getDocumentElement();
+        this.character = new Character(rootElement);
+        this.inventory = new Inventory(rootElement);
+        this.casterHeader = new CasterHeader(rootElement);
     }
 
     //Methods

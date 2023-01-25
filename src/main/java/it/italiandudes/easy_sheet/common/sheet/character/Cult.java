@@ -3,7 +3,11 @@ package it.italiandudes.easy_sheet.common.sheet.character;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.w3c.dom.Document;
+import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
+import org.w3c.dom.Element;
+
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
 
 @SuppressWarnings("unused")
 public final class Cult {
@@ -26,8 +30,25 @@ public final class Cult {
         this.cultDescription = "";
         this.cultImage = null;
     }
-    public Cult(@NotNull Document dndSheet){
+    public Cult(@NotNull Element dndSheet){
         //TODO: read xml sheet
+        if(dndSheet.getElementsByTagName(Character.Cult.NAME).getLength() > 0){
+            cultName = dndSheet.getElementsByTagName(Character.Cult.NAME).item(0).getTextContent();
+        }else{
+            cultName = "";
+        }
+        if(dndSheet.getElementsByTagName(Character.Cult.DESCRIPTION).getLength() > 0){
+            cultDescription = dndSheet.getElementsByTagName(Character.Cult.DESCRIPTION).item(0).getTextContent();
+        }else{
+            cultDescription = "";
+        }
+        if(dndSheet.getElementsByTagName(Character.Cult.IMAGE).getLength()>0){
+            cultImage = new Image(new ByteArrayInputStream(Base64.getDecoder().decode(
+                    dndSheet.getElementsByTagName(Character.Cult.IMAGE).item(0).getTextContent()
+            )));
+        }else{
+            cultImage = null;
+        }
     }
 
     //Methods

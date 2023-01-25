@@ -1,8 +1,10 @@
 package it.italiandudes.easy_sheet.common.sheet;
 
+import it.italiandudes.easy_sheet.EasySheet;
 import it.italiandudes.easy_sheet.common.sheet.inventory.Wallet;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 
@@ -22,9 +24,13 @@ public final class Inventory {
         wallet = new Wallet();
         items = new ArrayList<>();
     }
-    public Inventory(@NotNull Document dndSheet){
+    public Inventory(@NotNull Element dndSheet){
         wallet = new Wallet(dndSheet);
-        items = new ArrayList<>(); //TODO: read items from xml
+        items = new ArrayList<>();
+        NodeList itemList = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Item.ITEM);
+        for(int i=0;i<itemList.getLength();i++){
+            items.add(itemList.item(i).getTextContent());
+        }
     }
 
     //Methods

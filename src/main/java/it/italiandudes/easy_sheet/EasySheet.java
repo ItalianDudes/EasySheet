@@ -63,6 +63,59 @@ public final class EasySheet extends Application {
         public static final File JAR_EXECUTABLE_PATH = new File(EasySheet.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
         public static final int MAJOR_ABILITIES_NUM = 6;
         public static final int MINOR_ABILITIES_NUM = 18;
+
+        public static final class XMLElementNames {
+            public static final class Character {
+                public static final String CHARACTER = "character";
+                public static final class Cult {
+                    public static final String CULT = "cult";
+                    public static final String NAME = "name";
+                    public static final String DESCRIPTION = "description";
+                    public static final String IMAGE = "image";
+                }
+                public static final class Vitality {
+                    public static final class ArmorClass {
+                        public static final String NATURAL_AC = "natural_ac";
+                        public static final String ARMOR_AC = "armor_ac";
+                        public static final String SHIELD_AC = "shield_ac";
+                        public static final String TRAITS_AC = "traits_ac";
+                    }
+                }
+            }
+            public static final class Inventory {
+                public static final String INVENTORY = "inventory";
+                public static final class Item {
+                    public static final String ITEM = "item";
+                }
+                public static final class Wallet {
+                    public static final String WALLET = "wallet";
+                    public static final String COPPER_COINS = "copper_coins";
+                    public static final String SILVER_COINS = "silver_coins";
+                    public static final String ELECTRUM_COINS = "electrum_coins";
+                    public static final String GOLD_COINS = "gold_coins";
+                    public static final String PLATINUM_COINS = "platinum_coins";
+                }
+            }
+            public static final class SpellCategory {
+                public static final String SPELL_CATEGORY = "spell_category";
+                public static final class CasterHeader {
+                    public static final String CASTER_HEADER = "caster_header";
+                    public static final String CASTER_CLASS = "caster_class";
+                    public static final String CASTER_ABILITY = "caster_ability";
+                    public static final String CD_SPELL_SAVING_THROWS = "cd_spell_saving_throws";
+                    public static final String SPELL_ATTACK_BONUS = "spell_attack_bonus";
+                }
+                public static final class Spell {
+                    public static final String SPELL = "spell";
+                    public static final String NAME = "name";
+                    public static final String LEVEL = "level";
+                    public static final String TYPE = "type";
+                    public static final String DESCRIPTION = "description";
+                    public static final String IMAGE = "image";
+                }
+            }
+        }
+
     }
 
 }

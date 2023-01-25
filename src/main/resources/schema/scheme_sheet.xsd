@@ -9,8 +9,8 @@
         <xs:sequence>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="level" type="xs:integer"/>
-            <xs:element name="type" type="xs:string"/>
-            <xs:element name="description" type="xs:string"/>
+            <xs:element name="type" type="xs:string" minOccurs="0"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
             <xs:element name="image" type="xs:base64Binary" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
@@ -107,11 +107,10 @@
     </xs:complexType>
     <xs:complexType name="armor_class">
         <xs:sequence>
-            <xs:element name="current_ca" type="xs:integer"/>
-            <xs:element name="natural_ca" type="xs:integer"/>
-            <xs:element name="armor_ca" type="xs:integer"/>
-            <xs:element name="shield_ca" type="xs:integer"/>
-            <xs:element name="traits_ca" type="xs:integer"/>
+            <xs:element name="natural_ac" type="xs:integer"/>
+            <xs:element name="armor_ac" type="xs:integer"/>
+            <xs:element name="shield_ac" type="xs:integer"/>
+            <xs:element name="traits_ac" type="xs:integer"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="vitality">
