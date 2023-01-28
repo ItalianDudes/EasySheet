@@ -2,7 +2,7 @@ package it.italiandudes.easy_sheet.common.sheet.character;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
 public final class CharacterHeader {
@@ -41,7 +41,7 @@ public final class CharacterHeader {
     public CharacterHeader(){
         this(null, null, 1, null, null, null, null, null);
     }
-    public CharacterHeader(@NotNull Document dndSheet){
+    public CharacterHeader(@NotNull Element dndSheet){
         //TODO: read xml sheet
     }
 

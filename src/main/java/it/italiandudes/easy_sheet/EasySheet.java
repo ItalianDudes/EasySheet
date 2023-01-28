@@ -67,6 +67,36 @@ public final class EasySheet extends Application {
         public static final class XMLElementNames {
             public static final class Character {
                 public static final String CHARACTER = "character";
+                public static final class CharacterDescription {
+                    public static final String CHARACTER_DESCRIPTION = "character_description";
+                    public static final String AGE = "age";
+                    public static final String HEIGHT = "height";
+                    public static final String WEIGHT = "weight";
+                    public static final String EYES = "eyes";
+                    public static final String SKIN = "skin";
+                    public static final String HAIR = "hair";
+                    public static final String CHARACTER_IMAGE ="character_image";
+                    public static final class Personality {
+                        public static final String PERSONALITY = "personality";
+                        public static final String TRAIT = "trait";
+                    }
+                    public static final class Ideals {
+                        public static final String IDEALS = "ideals";
+                        public static final String IDEAL = "ideal";
+                    }
+                    public static final class Flaws {
+                        public static final String FLAWS = "flaws";
+                        public static final String FLAW = "flaw";
+                    }
+                    public static final class Bonds {
+                        public static final String BONDS = "bonds";
+                        public static final String BOND = "bond";
+                    }
+                    public static final class PrivilegesAndTraits {
+                        public static final String PRIVILEGES_AND_TRAITS = "privileges_and_traits";
+                        public static final String PRIVILEGE_OR_TRAIT = "privilege_or_trait";
+                    }
+                }
                 public static final class Cult {
                     public static final String CULT = "cult";
                     public static final String NAME = "name";

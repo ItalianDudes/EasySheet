@@ -1,11 +1,15 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
+import it.italiandudes.easy_sheet.EasySheet;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 
 @SuppressWarnings("unused")
 public final class CharacterDescription {
@@ -39,8 +43,51 @@ public final class CharacterDescription {
         hair = "";
         characterImage = null;
     }
-    public CharacterDescription(@NotNull Document dndSheet){
-        //TODO: read xml sheet
+    public CharacterDescription(@NotNull Element dndSheet){
+        personality = new ArrayList<>();
+        Element personalityElement = (Element) dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Personality.PERSONALITY).item(0);
+        NodeList personalityTraits = personalityElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Personality.TRAIT);
+        for(int i=0;i<personalityTraits.getLength();i++){
+            personality.add(personalityTraits.item(i).getTextContent());
+        }
+        flaws = new ArrayList<>();
+        Element flawsElement = (Element) dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Flaws.FLAWS).item(0);
+        NodeList flawTraits = flawsElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Flaws.FLAW);
+        for(int i=0;i<flawTraits.getLength();i++){
+            flaws.add(flawTraits.item(0).getTextContent());
+        }
+        ideals = new ArrayList<>();
+        Element idealsElement = (Element) dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Ideals.IDEALS).item(0);
+        NodeList idealTraits = idealsElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Ideals.IDEAL);
+        for(int i=0;i<idealTraits.getLength();i++){
+            ideals.add(idealTraits.item(i).getTextContent());
+        }
+        bonds = new ArrayList<>();
+        Element bondsElement = (Element) dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Bonds.BONDS).item(0);
+        NodeList bondTraits = bondsElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Bonds.BOND);
+        for(int i=0;i<bondTraits.getLength();i++){
+            bonds.add(bondTraits.item(i).getTextContent());
+        }
+        privilegesAndTraits = new ArrayList<>();
+        Element privilegesAndTraitsElement = (Element) dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.PrivilegesAndTraits.PRIVILEGES_AND_TRAITS).item(0);
+        NodeList privilegesAndTraitsList = privilegesAndTraitsElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.PrivilegesAndTraits.PRIVILEGE_OR_TRAIT);
+        for(int i=0;i<privilegesAndTraitsList.getLength();i++){
+            privilegesAndTraits.add(privilegesAndTraitsList.item(i).getTextContent());
+        }
+        age = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.AGE).item(0).getTextContent();
+        height = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.HEIGHT).item(0).getTextContent();
+        weight = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.WEIGHT).item(0).getTextContent();
+        eyes = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.EYES).item(0).getTextContent();
+        skin = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.SKIN).item(0).getTextContent();
+        hair = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.HAIR).item(0).getTextContent();
+        age = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.AGE).item(0).getTextContent();
+        if(dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.CHARACTER_IMAGE).getLength()>0){
+            characterImage = new Image(new ByteArrayInputStream(Base64.getDecoder().decode(
+                    dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.CHARACTER_IMAGE).item(0).getTextContent()
+            )));
+        }else{
+            characterImage = null;
+        }
     }
 
     //Methods

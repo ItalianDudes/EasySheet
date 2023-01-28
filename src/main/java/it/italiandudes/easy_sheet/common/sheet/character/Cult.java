@@ -31,7 +31,6 @@ public final class Cult {
         this.cultImage = null;
     }
     public Cult(@NotNull Element dndSheet){
-        //TODO: read xml sheet
         if(dndSheet.getElementsByTagName(Character.Cult.NAME).getLength() > 0){
             cultName = dndSheet.getElementsByTagName(Character.Cult.NAME).item(0).getTextContent();
         }else{
