@@ -3,7 +3,6 @@ package it.italiandudes.easy_sheet.common.sheet;
 import it.italiandudes.easy_sheet.common.sheet.character.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
@@ -42,14 +41,14 @@ public final class Character {
                 new ArrayList<>(),
                 new Cult());
     }
-    public Character(@NotNull Element dndSheet){
-        characterHeader = null;
-        characterDescription = null;
+    public Character(@NotNull Element dndSheet) throws RuntimeException {
+        characterHeader = new CharacterHeader(dndSheet);
+        characterDescription = new CharacterDescription(dndSheet);
         stats = null;
         vitality = null;
         story = null;
         alliesAndOrganizations = null;
-        cult = null;
+        cult = new Cult(dndSheet);
         //TODO: read xml sheet
     }
 

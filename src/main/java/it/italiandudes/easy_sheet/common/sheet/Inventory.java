@@ -24,7 +24,7 @@ public final class Inventory {
         wallet = new Wallet();
         items = new ArrayList<>();
     }
-    public Inventory(@NotNull Element dndSheet){
+    public Inventory(@NotNull Element dndSheet) throws RuntimeException {
         wallet = new Wallet(dndSheet);
         items = new ArrayList<>();
         NodeList itemList = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Item.ITEM);

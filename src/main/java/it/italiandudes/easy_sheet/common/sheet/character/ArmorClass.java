@@ -29,7 +29,7 @@ public final class ArmorClass {
         this.traitsAC = 0;
         updateTotalAC();
     }
-    public ArmorClass(@NotNull Element dndSheet){
+    public ArmorClass(@NotNull Element dndSheet) throws RuntimeException {
         naturalAC = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.ArmorClass.NATURAL_AC).item(0).getTextContent());
         armorAC = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.ArmorClass.ARMOR_AC).item(0).getTextContent());
         shieldAC = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.ArmorClass.SHIELD_AC).item(0).getTextContent());

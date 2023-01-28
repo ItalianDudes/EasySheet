@@ -32,7 +32,7 @@ public final class Stats {
         updateInitiative();
         updatePassivePerception();
     }
-    public Stats(@NotNull Document dndSheet){
+    public Stats(@NotNull Document dndSheet) throws RuntimeException {
         //TODO: read xml sheet
     }
 

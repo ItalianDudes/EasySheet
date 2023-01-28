@@ -43,7 +43,7 @@ public final class CharacterDescription {
         hair = "";
         characterImage = null;
     }
-    public CharacterDescription(@NotNull Element dndSheet){
+    public CharacterDescription(@NotNull Element dndSheet) throws RuntimeException {
         personality = new ArrayList<>();
         Element personalityElement = (Element) dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Personality.PERSONALITY).item(0);
         NodeList personalityTraits = personalityElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.CharacterDescription.Personality.TRAIT);

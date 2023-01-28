@@ -31,7 +31,7 @@ public final class Wallet {
         this.platinumCoins = platinumCoins;
     }
 
-    public Wallet(@NotNull Element dndSheet) {
+    public Wallet(@NotNull Element dndSheet) throws RuntimeException {
         Element walletElement = (Element) dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.WALLET).item(0);
         copperCoins = Integer.parseInt(walletElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.COPPER_COINS).item(0).getTextContent());
         silverCoins = Integer.parseInt(walletElement.getElementsByTagName(EasySheet.Defs.XMLElementNames.Inventory.Wallet.SILVER_COINS).item(0).getTextContent());

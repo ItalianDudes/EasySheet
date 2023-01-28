@@ -2,6 +2,7 @@ package it.italiandudes.easy_sheet.common.sheet.character;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
 import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
@@ -41,8 +42,16 @@ public final class CharacterHeader {
     public CharacterHeader(){
         this(null, null, 1, null, null, null, null, null);
     }
-    public CharacterHeader(@NotNull Element dndSheet){
-        //TODO: read xml sheet
+    public CharacterHeader(@NotNull Element dndSheet) throws RuntimeException {
+        characterName = dndSheet.getElementsByTagName(Character.CharacterHeader.CHARACTER_NAME).item(0).getTextContent();
+        characterClass = dndSheet.getElementsByTagName(Character.CharacterHeader.CHARACTER_CLASS).item(0).getTextContent();
+        level = Integer.parseInt(dndSheet.getElementsByTagName(Character.CharacterHeader.LEVEL).item(0).getTextContent());
+        background = dndSheet.getElementsByTagName(Character.CharacterHeader.BACKGROUND).item(0).getTextContent();
+        race = dndSheet.getElementsByTagName(Character.CharacterHeader.RACE).item(0).getTextContent();
+        playerName = dndSheet.getElementsByTagName(Character.CharacterHeader.PLAYER_NAME).item(0).getTextContent();
+        alignment = dndSheet.getElementsByTagName(Character.CharacterHeader.ALIGNMENT).item(0).getTextContent();
+        campaign = dndSheet.getElementsByTagName(Character.CharacterHeader.CAMPAIGN).item(0).getTextContent();
+        exp = Integer.parseInt(dndSheet.getElementsByTagName(Character.CharacterHeader.EXP).item(0).getTextContent());
     }
 
     //Methods

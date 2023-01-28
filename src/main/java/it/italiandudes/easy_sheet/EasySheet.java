@@ -67,6 +67,18 @@ public final class EasySheet extends Application {
         public static final class XMLElementNames {
             public static final class Character {
                 public static final String CHARACTER = "character";
+                public static final class CharacterHeader {
+                    public static final String CHARACTER_HEADER = "character_header";
+                    public static final String CHARACTER_NAME = "character_name";
+                    public static final String CHARACTER_CLASS = "character_class";
+                    public static final String LEVEL = "level";
+                    public static final String BACKGROUND = "background";
+                    public static final String RACE = "race";
+                    public static final String PLAYER_NAME = "player_name";
+                    public static final String ALIGNMENT = "alignment";
+                    public static final String CAMPAIGN = "campaign";
+                    public static final String EXP = "exp";
+                }
                 public static final class CharacterDescription {
                     public static final String CHARACTER_DESCRIPTION = "character_description";
                     public static final String AGE = "age";

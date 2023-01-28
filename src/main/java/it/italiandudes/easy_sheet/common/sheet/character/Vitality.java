@@ -41,7 +41,7 @@ public final class Vitality {
         successDeathSavingThrows = 0;
         failDeathSavingThrows = 0;
     }
-    public Vitality(@NotNull Document dndSheet){
+    public Vitality(@NotNull Document dndSheet) throws RuntimeException {
         AC = null;
         totalHitDiceRoll = null;
         currentHitDiceRoll = null;

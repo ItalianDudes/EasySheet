@@ -30,7 +30,7 @@ public final class Cult {
         this.cultDescription = "";
         this.cultImage = null;
     }
-    public Cult(@NotNull Element dndSheet){
+    public Cult(@NotNull Element dndSheet) throws RuntimeException {
         if(dndSheet.getElementsByTagName(Character.Cult.NAME).getLength() > 0){
             cultName = dndSheet.getElementsByTagName(Character.Cult.NAME).item(0).getTextContent();
         }else{
