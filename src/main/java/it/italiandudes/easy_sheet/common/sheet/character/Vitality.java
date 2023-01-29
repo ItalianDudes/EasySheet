@@ -1,12 +1,15 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import it.italiandudes.easy_sheet.common.sheet.generic.DiceRoll;
+import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
-public final class Vitality {
+public final class Vitality implements SheetComponent {
 
     //Attributes
     @NotNull private final ArmorClass AC;
@@ -41,11 +44,15 @@ public final class Vitality {
         successDeathSavingThrows = 0;
         failDeathSavingThrows = 0;
     }
-    public Vitality(@NotNull Document dndSheet) throws RuntimeException {
-        AC = null;
-        totalHitDiceRoll = null;
-        currentHitDiceRoll = null;
-        //TODO: read xml sheet
+    public Vitality(@NotNull Element dndSheet) throws RuntimeException {
+        AC = new ArmorClass(dndSheet);
+        speed = dndSheet.getElementsByTagName(Character.Vitality.SPEED).item(0).getTextContent();
+        maxHP = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.MAX_HP).item(0).getTextContent());
+        currentHP = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.CURRENT_HP).item(0).getTextContent());
+        totalHitDiceRoll = new DiceRoll(dndSheet.getElementsByTagName(Character.Vitality.TOTAL_HIT_DICE_ROLL).item(0).getTextContent());
+        currentHitDiceRoll = new DiceRoll(dndSheet.getElementsByTagName(Character.Vitality.CURRENT_HIT_DICE_ROLL).item(0).getTextContent());
+        successDeathSavingThrows = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.SUCCESS_DEATH_SAVING_THROWS).item(0).getTextContent());
+        failDeathSavingThrows = Integer.parseInt(dndSheet.getElementsByTagName(Character.Vitality.FAIL_DEATH_SAVING_THROWS).item(0).getTextContent());
     }
 
     //Methods
@@ -92,6 +99,10 @@ public final class Vitality {
     }
     public void setFailDeathSavingThrows(int failDeathSavingThrows) {
         this.failDeathSavingThrows = failDeathSavingThrows;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        //TODO: implement sheet component write
     }
     @Override
     public boolean equals(Object o) {

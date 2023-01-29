@@ -1,16 +1,16 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
+import it.italiandudes.easy_sheet.common.util.ImageFX64;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import java.io.ByteArrayInputStream;
-import java.util.Base64;
-
 @SuppressWarnings("unused")
-public final class Cult {
+public final class Cult implements SheetComponent {
 
     //Attributes
     @NotNull private String cultName;
@@ -42,9 +42,7 @@ public final class Cult {
             cultDescription = "";
         }
         if(dndSheet.getElementsByTagName(Character.Cult.IMAGE).getLength()>0){
-            cultImage = new Image(new ByteArrayInputStream(Base64.getDecoder().decode(
-                    dndSheet.getElementsByTagName(Character.Cult.IMAGE).item(0).getTextContent()
-            )));
+            cultImage = ImageFX64.base64ToImage(dndSheet.getElementsByTagName(Character.Cult.IMAGE).item(0).getTextContent());
         }else{
             cultImage = null;
         }
@@ -73,6 +71,22 @@ public final class Cult {
     }
     public void setCultImage(@Nullable Image cultImage) {
         this.cultImage = cultImage;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        Element cultElement = dndSheet.createElement(Character.Cult.CULT);
+        Element nameElement = dndSheet.createElement(Character.Cult.NAME);
+        nameElement.setTextContent(cultName);
+        cultElement.appendChild(nameElement);
+        Element descriptionElement = dndSheet.createElement(Character.Cult.DESCRIPTION);
+        descriptionElement.setTextContent(cultDescription);
+        cultElement.appendChild(descriptionElement);
+        if (cultImage != null) {
+            Element imageElement = dndSheet.createElement(Character.Cult.IMAGE);
+            imageElement.setTextContent(ImageFX64.imageToBase64(cultImage));
+            cultElement.appendChild(imageElement);
+        }
+        parent.appendChild(cultElement);
     }
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,7 @@
 package it.italiandudes.easy_sheet.common.sheet.generic;
 
+import org.jetbrains.annotations.NotNull;
+
 @SuppressWarnings("unused")
 public final class DiceRoll {
 
@@ -11,6 +13,12 @@ public final class DiceRoll {
     public DiceRoll(int numDices, int numFaces){
         this.numDices = numDices;
         this.numFaces = numFaces;
+    }
+    public DiceRoll(@NotNull String diceRollFormattedString) throws RuntimeException {
+        String[] splitStr = diceRollFormattedString.split("d");
+        if(splitStr.length!=2) throw new RuntimeException("Invalid String DiceRoll format!");
+        numDices = Integer.parseInt(splitStr[0]);
+        numFaces = Integer.parseInt(splitStr[1]);
     }
 
     //Methods

@@ -3,6 +3,7 @@ package it.italiandudes.easy_sheet.common;
 import it.italiandudes.easy_sheet.EasySheet;
 import it.italiandudes.easy_sheet.common.sheet.Character;
 import it.italiandudes.easy_sheet.common.sheet.Inventory;
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import it.italiandudes.easy_sheet.common.sheet.spell_category.CasterHeader;
 import it.italiandudes.easy_sheet.javafx.JFXDefs;
 import it.italiandudes.idl.common.Logger;
@@ -19,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 
 @SuppressWarnings("unused")
-public final class Sheet {
+public final class Sheet implements SheetComponent {
 
     //Attributes
     @NotNull private final Character character;
@@ -64,6 +65,10 @@ public final class Sheet {
     @NotNull
     public CasterHeader getSpellCategory(){
         return casterHeader;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        //TODO: implement sheet component write
     }
     @Override
     public boolean equals(Object o) {

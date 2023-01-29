@@ -1,14 +1,17 @@
 package it.italiandudes.easy_sheet.common.sheet;
 
+import it.italiandudes.easy_sheet.EasySheet;
 import it.italiandudes.easy_sheet.common.sheet.character.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 
 @SuppressWarnings("unused")
-public final class Character {
+public final class Character implements SheetComponent {
 
     //Attributes
     @NotNull private final CharacterHeader characterHeader;
@@ -44,12 +47,15 @@ public final class Character {
     public Character(@NotNull Element dndSheet) throws RuntimeException {
         characterHeader = new CharacterHeader(dndSheet);
         characterDescription = new CharacterDescription(dndSheet);
-        stats = null;
-        vitality = null;
-        story = null;
-        alliesAndOrganizations = null;
+        stats = new Stats(dndSheet);
+        vitality = new Vitality(dndSheet);
+        story = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.STORY).item(0).getTextContent();
+        alliesAndOrganizations = new ArrayList<>();
+        NodeList alliesAndOrganizationList = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.ALLY_OR_ORGANIZATION);
+        for(int i=0;i<alliesAndOrganizationList.getLength();i++){
+            alliesAndOrganizations.add(alliesAndOrganizationList.item(i).getTextContent());
+        }
         cult = new Cult(dndSheet);
-        //TODO: read xml sheet
     }
 
     //Methods
@@ -84,6 +90,10 @@ public final class Character {
     @NotNull
     public Cult getCult() {
         return cult;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        //TODO: implement sheet component write
     }
     @Override
     public boolean equals(Object o) {

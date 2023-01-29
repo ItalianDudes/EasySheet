@@ -67,6 +67,44 @@ public final class EasySheet extends Application {
         public static final class XMLElementNames {
             public static final class Character {
                 public static final String CHARACTER = "character";
+                public static final String STORY = "story";
+                public static final String ALLIES_AND_ORGANIZATIONS = "allies_and_organizations";
+                public static final String ALLY_OR_ORGANIZATION = "ally_or_organization";
+                public static final class Vitality {
+                    public static final String VITALITY = "vitality";
+                    public static final String SPEED = "speed";
+                    public static final String MAX_HP = "max_hp";
+                    public static final String CURRENT_HP = "current_hp";
+                    public static final String TOTAL_HIT_DICE_ROLL = "total_hit_dice";
+                    public static final String CURRENT_HIT_DICE_ROLL = "current_hit_dice";
+                    public static final String SUCCESS_DEATH_SAVING_THROWS = "success_death_saving_throws";
+                    public static final String FAIL_DEATH_SAVING_THROWS = "fail_death_saving_throws";
+                    public static final class ArmorClass {
+                        public static final String ARMOR_CLASS = "armor_class";
+                        public static final String NATURAL_AC = "natural_ac";
+                        public static final String ARMOR_AC = "armor_ac";
+                        public static final String SHIELD_AC = "shield_ac";
+                        public static final String TRAITS_AC = "traits_ac";
+                    }
+                }
+                public static final class Stats {
+                    public static final String STATS = "stats";
+                    public static final String INSPIRATION_BONUS = "inspiration_bonus";
+                    public static final String PROFICIENCY_BONUS = "proficiency_bonus";
+                    public static final class MajorAbility {
+                        public static final String MAJOR_ABILITY = "major_ability";
+                        public static final String ID = "id";
+                        public static final String VALUE = "value";
+                        public static final String SAVING_THROW_PROFICIENCY = "saving_throw_proficiency";
+                    }
+                    public static final class Abilities {
+                        public static final String ABILITIES = "abilities";
+                        public static final String ABILITY = "ability";
+                        public static final String PROFICIENCY_LEVEL = "proficiency_level";
+                        public static final String ID = "id";
+                    }
+                    public static final String ABILITIES = "abilities";
+                }
                 public static final class CharacterHeader {
                     public static final String CHARACTER_HEADER = "character_header";
                     public static final String CHARACTER_NAME = "character_name";
@@ -114,14 +152,6 @@ public final class EasySheet extends Application {
                     public static final String NAME = "name";
                     public static final String DESCRIPTION = "description";
                     public static final String IMAGE = "image";
-                }
-                public static final class Vitality {
-                    public static final class ArmorClass {
-                        public static final String NATURAL_AC = "natural_ac";
-                        public static final String ARMOR_AC = "armor_ac";
-                        public static final String SHIELD_AC = "shield_ac";
-                        public static final String TRAITS_AC = "traits_ac";
-                    }
                 }
             }
             public static final class Inventory {

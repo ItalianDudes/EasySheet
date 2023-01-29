@@ -1,12 +1,14 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
-public final class CharacterHeader {
+public final class CharacterHeader implements SheetComponent {
 
     //Attributes
     @NotNull private String characterName;
@@ -122,6 +124,10 @@ public final class CharacterHeader {
     }
     public void setExp(int exp) {
         this.exp = exp;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        //TODO: implement sheet component write
     }
     @Override
     public boolean equals(Object o) {

@@ -1,11 +1,13 @@
 package it.italiandudes.easy_sheet.common.sheet.inventory;
 
 import it.italiandudes.easy_sheet.EasySheet;
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
-public final class Wallet {
+public final class Wallet implements SheetComponent {
 
     //Attributes
     private int copperCoins;
@@ -79,6 +81,26 @@ public final class Wallet {
 
     public void setPlatinumCoins(int platinumCoins) {
         this.platinumCoins = platinumCoins;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        Element walletElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Inventory.Wallet.WALLET);
+        Element copperCoinElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Inventory.Wallet.COPPER_COINS);
+        copperCoinElement.setTextContent(String.valueOf(copperCoins));
+        walletElement.appendChild(copperCoinElement);
+        Element silverCoinElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Inventory.Wallet.SILVER_COINS);
+        silverCoinElement.setTextContent(String.valueOf(silverCoins));
+        walletElement.appendChild(silverCoinElement);
+        Element electrumCoinElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Inventory.Wallet.ELECTRUM_COINS);
+        electrumCoinElement.setTextContent(String.valueOf(electrumCoins));
+        walletElement.appendChild(electrumCoinElement);
+        Element goldCoinElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Inventory.Wallet.GOLD_COINS);
+        goldCoinElement.setTextContent(String.valueOf(goldCoins));
+        walletElement.appendChild(goldCoinElement);
+        Element platinumCoinElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Inventory.Wallet.PLATINUM_COINS);
+        platinumCoinElement.setTextContent(String.valueOf(platinumCoins));
+        walletElement.appendChild(platinumCoinElement);
+        parent.appendChild(walletElement);
     }
     @Override
     public boolean equals(Object o) {

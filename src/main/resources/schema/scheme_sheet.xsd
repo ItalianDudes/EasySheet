@@ -16,10 +16,8 @@
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="ability">
-        <xs:sequence>
-            <xs:element name="id" type="xs:integer"/>
-            <xs:element name="proficiencyLevel" type="xs:integer"/>
-        </xs:sequence>
+            <xs:attribute name="id" type="xs:integer"/>
+            <xs:attribute name="proficiency_level" type="xs:integer"/>
     </xs:complexType>
     <xs:complexType name="abilities">
         <xs:sequence>
@@ -27,11 +25,9 @@
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="major_ability">
-        <xs:sequence>
-            <xs:element name="id" type="xs:integer"/>
-            <xs:element name="value" type="xs:integer"/>
-            <xs:element name="saving_throw_proficiency" type="xs:boolean"/>
-        </xs:sequence>
+        <xs:attribute name="id" type="xs:integer"/>
+        <xs:attribute name="value" type="xs:integer"/>
+        <xs:attribute name="saving_throw_proficiency" type="xs:boolean"/>
     </xs:complexType>
     <xs:complexType name="character_header">
         <xs:sequence>
@@ -146,8 +142,6 @@
         <xs:sequence>
             <xs:element name="caster_class" type="xs:string"/>
             <xs:element name="caster_ability" type="xs:string"/>
-            <xs:element name="cd_spell_saving_throws" type="xs:integer"/>
-            <xs:element name="spell_attack_bonus" type="xs:integer"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="character">

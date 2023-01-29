@@ -1,12 +1,15 @@
 package it.italiandudes.easy_sheet.common.sheet.spell_category;
 
 import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames;
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
+import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.SpellCategory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
-public final class CasterHeader {
+public final class CasterHeader implements SheetComponent {
 
     //Attributes
     @NotNull private String casterClass;
@@ -65,6 +68,23 @@ public final class CasterHeader {
     }
     public void setSpellAttackBonus(int spellAttackBonus) {
         this.spellAttackBonus = spellAttackBonus;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        Element casterHeaderElement = dndSheet.createElement(SpellCategory.CasterHeader.CASTER_HEADER);
+        Element casterClassElement = dndSheet.createElement(SpellCategory.CasterHeader.CASTER_CLASS);
+        casterClassElement.setTextContent(casterClass);
+        casterHeaderElement.appendChild(casterClassElement);
+        Element casterAbilityElement = dndSheet.createElement(SpellCategory.CasterHeader.CASTER_ABILITY);
+        casterAbilityElement.setTextContent(casterAbility);
+        casterHeaderElement.appendChild(casterAbilityElement);
+        Element cdSpellSavingThrowsElement = dndSheet.createElement(SpellCategory.CasterHeader.CD_SPELL_SAVING_THROWS);
+        cdSpellSavingThrowsElement.setTextContent(String.valueOf(cdSpellSavingThrows));
+        casterHeaderElement.appendChild(cdSpellSavingThrowsElement);
+        Element spellAttackBonusElement = dndSheet.createElement(SpellCategory.CasterHeader.SPELL_ATTACK_BONUS);
+        spellAttackBonusElement.setTextContent(String.valueOf(spellAttackBonus));
+        casterHeaderElement.appendChild(spellAttackBonusElement);
+        parent.appendChild(casterHeaderElement);
     }
     @Override
     public boolean equals(Object o) {

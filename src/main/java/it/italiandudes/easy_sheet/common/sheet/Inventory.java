@@ -3,13 +3,14 @@ package it.italiandudes.easy_sheet.common.sheet;
 import it.italiandudes.easy_sheet.EasySheet;
 import it.italiandudes.easy_sheet.common.sheet.inventory.Wallet;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 
 @SuppressWarnings("unused")
-public final class Inventory {
+public final class Inventory implements SheetComponent {
 
     //Attributes
     @NotNull private final Wallet wallet;
@@ -41,6 +42,10 @@ public final class Inventory {
     @NotNull
     public ArrayList<String> getItems() {
         return items;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        //TODO: implement sheet component write
     }
     @Override
     public boolean equals(Object o) {

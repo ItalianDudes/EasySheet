@@ -5,6 +5,7 @@ import it.italiandudes.easy_sheet.common.sheet.generic.Spell;
 import it.italiandudes.easy_sheet.common.sheet.spell_category.CasterHeader;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 @SuppressWarnings("unused")
-public final class SpellCategory {
+public final class SpellCategory implements SheetComponent {
 
     //Attributes
     @NotNull private final CasterHeader casterHeader;
@@ -69,6 +70,10 @@ public final class SpellCategory {
     @NotNull
     public ArrayList<Spell> getSpells() {
         return spells;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        //TODO: implement sheet component write
     }
     @Override
     public boolean equals(Object o) {

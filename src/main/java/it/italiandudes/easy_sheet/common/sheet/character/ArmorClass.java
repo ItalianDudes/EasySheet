@@ -1,11 +1,13 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import org.jetbrains.annotations.NotNull;
 import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
-public final class ArmorClass {
+public final class ArmorClass implements SheetComponent {
 
     //Attributes
     private int currentAC;
@@ -71,6 +73,24 @@ public final class ArmorClass {
     public void setTraitsAC(int traitsAC) {
         this.traitsAC = traitsAC;
         updateTotalAC();
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        Element armorClassElement = dndSheet.createElement(Character.Vitality.ArmorClass.ARMOR_CLASS);
+        Element naturalACElement = dndSheet.createElement(Character.Vitality.ArmorClass.NATURAL_AC);
+        naturalACElement.setTextContent(String.valueOf(naturalAC));
+        armorClassElement.appendChild(naturalACElement);
+        Element armorACElement = dndSheet.createElement(Character.Vitality.ArmorClass.ARMOR_AC);
+        armorACElement.setTextContent(String.valueOf(armorAC));
+        armorClassElement.appendChild(armorACElement);
+        Element shieldACElement = dndSheet.createElement(Character.Vitality.ArmorClass.SHIELD_AC);
+        shieldACElement.setTextContent(String.valueOf(shieldAC));
+        armorClassElement.appendChild(shieldACElement);
+        Element traitsACElement = dndSheet.createElement(Character.Vitality.ArmorClass.TRAITS_AC);
+        traitsACElement.setTextContent(String.valueOf(traitsAC));
+        armorClassElement.appendChild(traitsACElement);
+        parent.appendChild(armorClassElement);
+
     }
     @Override
     public boolean equals(Object o) {

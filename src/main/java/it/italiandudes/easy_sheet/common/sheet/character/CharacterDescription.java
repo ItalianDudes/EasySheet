@@ -1,9 +1,11 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
 import it.italiandudes.easy_sheet.EasySheet;
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 @SuppressWarnings("unused")
-public final class CharacterDescription {
+public final class CharacterDescription implements SheetComponent {
 
     //Attributes
     @NotNull private ArrayList<String> personality;
@@ -185,5 +187,62 @@ public final class CharacterDescription {
     }
     public void setCharacterImage(@Nullable Image characterImage) {
         this.characterImage = characterImage;
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        //TODO: implement sheet component write
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CharacterDescription that = (CharacterDescription) o;
+
+        if (!getPersonality().equals(that.getPersonality())) return false;
+        if (!getFlaws().equals(that.getFlaws())) return false;
+        if (!getIdeals().equals(that.getIdeals())) return false;
+        if (!getBonds().equals(that.getBonds())) return false;
+        if (!getPrivilegesAndTraits().equals(that.getPrivilegesAndTraits())) return false;
+        if (!getAge().equals(that.getAge())) return false;
+        if (!getHeight().equals(that.getHeight())) return false;
+        if (!getWeight().equals(that.getWeight())) return false;
+        if (!getEyes().equals(that.getEyes())) return false;
+        if (!getSkin().equals(that.getSkin())) return false;
+        if (!getHair().equals(that.getHair())) return false;
+        return getCharacterImage() != null ? getCharacterImage().equals(that.getCharacterImage()) : that.getCharacterImage() == null;
+    }
+    @Override
+    public int hashCode() {
+        int result = getPersonality().hashCode();
+        result = 31 * result + getFlaws().hashCode();
+        result = 31 * result + getIdeals().hashCode();
+        result = 31 * result + getBonds().hashCode();
+        result = 31 * result + getPrivilegesAndTraits().hashCode();
+        result = 31 * result + getAge().hashCode();
+        result = 31 * result + getHeight().hashCode();
+        result = 31 * result + getWeight().hashCode();
+        result = 31 * result + getEyes().hashCode();
+        result = 31 * result + getSkin().hashCode();
+        result = 31 * result + getHair().hashCode();
+        result = 31 * result + (getCharacterImage() != null ? getCharacterImage().hashCode() : 0);
+        return result;
+    }
+    @Override
+    public String toString() {
+        return "CharacterDescription{" +
+                "personality=" + personality +
+                ", flaws=" + flaws +
+                ", ideals=" + ideals +
+                ", bonds=" + bonds +
+                ", privilegesAndTraits=" + privilegesAndTraits +
+                ", age='" + age + '\'' +
+                ", height='" + height + '\'' +
+                ", weight='" + weight + '\'' +
+                ", eyes='" + eyes + '\'' +
+                ", skin='" + skin + '\'' +
+                ", hair='" + hair + '\'' +
+                ", characterImage=" + characterImage +
+                '}';
     }
 }

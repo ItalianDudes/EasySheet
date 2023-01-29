@@ -1,9 +1,12 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 @SuppressWarnings("unused")
-public enum Ability {
+public enum Ability implements SheetComponent {
     ACROBATICS(0, MajorAbility.DEXTERITY),
     ANIMAL_HANDLING(1, MajorAbility.WISDOM),
     ARCANA(2, MajorAbility.INTELLIGENCE),
@@ -46,6 +49,10 @@ public enum Ability {
     public void setProficiencyLevel(int proficiencyLevel) {
         if(proficiencyLevel > 2) this.proficiencyLevel = 2;
         else this.proficiencyLevel = Math.max(proficiencyLevel, 0);
+    }
+    @Override
+    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
+        //TODO: implement sheet component write
     }
     @Override
     public String toString() {
