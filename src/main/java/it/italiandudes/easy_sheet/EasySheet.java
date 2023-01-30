@@ -1,5 +1,6 @@
 package it.italiandudes.easy_sheet;
 
+import it.italiandudes.easy_sheet.common.Sheet;
 import it.italiandudes.easy_sheet.javafx.JFXDefs;
 import it.italiandudes.easy_sheet.javafx.scene.SceneStartup;
 import it.italiandudes.idl.common.Logger;
@@ -10,6 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,6 +27,16 @@ public final class EasySheet extends Application {
         try {
             XML_DOCUMENT_BUILDER = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static final Transformer XML_DOCUMENT_WRITER;
+    static {
+        try {
+            XML_DOCUMENT_WRITER = TransformerFactory.newInstance().newTransformer();
+            XML_DOCUMENT_WRITER.setOutputProperty(OutputKeys.INDENT, "yes");
+            XML_DOCUMENT_WRITER.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+        } catch (TransformerConfigurationException e) {
             throw new RuntimeException(e);
         }
     }
@@ -54,7 +69,18 @@ public final class EasySheet extends Application {
             System.err.println("Logger can't be initialized. Exit...");
         }
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> Logger.log(e));
-        launch(args);
+        //launch(args);
+        testWriteXML();
+
+    }
+
+    private static void testWriteXML() {
+        Sheet sheet = new Sheet();
+        try {
+            sheet.writeSheet("sheet.xml");
+        }catch (Exception e){
+            Logger.log(e);
+        }
     }
 
     //Defs
@@ -65,11 +91,18 @@ public final class EasySheet extends Application {
         public static final int MINOR_ABILITIES_NUM = 18;
 
         public static final class XMLElementNames {
+            public static final String DND_SHEET = "dnd_sheet";
             public static final class Character {
                 public static final String CHARACTER = "character";
                 public static final String STORY = "story";
-                public static final String ALLIES_AND_ORGANIZATIONS = "allies_and_organizations";
-                public static final String ALLY_OR_ORGANIZATION = "ally_or_organization";
+                public static final class OtherProficienciesAndLanguages {
+                    public static final String OTHER_PROFICIENCIES_AND_LANGUAGES = "other_proficiencies_and_languages";
+                    public static final String OTHER_PROFICIENCY_OR_LANGUAGE = "other_proficiency_or_language";
+                }
+                public static final class AlliesAndOrganizations {
+                    public static final String ALLIES_AND_ORGANIZATIONS = "allies_and_organizations";
+                    public static final String ALLY_OR_ORGANIZATION = "ally_or_organization";
+                }
                 public static final class Vitality {
                     public static final String VITALITY = "vitality";
                     public static final String SPEED = "speed";

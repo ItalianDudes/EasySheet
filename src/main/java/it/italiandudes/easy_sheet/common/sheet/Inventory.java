@@ -45,7 +45,15 @@ public final class Inventory implements SheetComponent {
     }
     @Override
     public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
-        //TODO: implement sheet component write
+        Element inventoryElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Inventory.INVENTORY);
+        Element itemElement;
+        for(String item : items){
+            itemElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Inventory.Item.ITEM);
+            itemElement.setTextContent(item);
+            inventoryElement.appendChild(itemElement);
+        }
+        wallet.writeComponent(dndSheet, inventoryElement);
+        parent.appendChild(inventoryElement);
     }
     @Override
     public boolean equals(Object o) {

@@ -1,12 +1,7 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
-import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
-import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 @SuppressWarnings("unused")
-public enum MajorAbility implements SheetComponent {
+public enum MajorAbility {
     STRENGTH(0),
     DEXTERITY(1),
     CONSTITUTION(2),
@@ -47,9 +42,5 @@ public enum MajorAbility implements SheetComponent {
     }
     public void setSavingThrowProficiency(boolean savingThrowProficiency){
         this.savingThrowProficiency = savingThrowProficiency;
-    }
-    @Override
-    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
-        //TODO: implement sheet component write
     }
 }

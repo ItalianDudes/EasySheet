@@ -19,16 +19,18 @@ public final class Character implements SheetComponent {
     @NotNull private final Stats stats;
     @NotNull private final Vitality vitality;
     @NotNull private String story;
+    @NotNull private final ArrayList<String> otherProficienciesAndLanguages;
     @NotNull private final ArrayList<String> alliesAndOrganizations;
     @NotNull private final Cult cult;
 
     //Constructors
     public Character(@NotNull CharacterHeader characterHeader, @NotNull CharacterDescription characterDescription,
-                     @NotNull Stats stats, @NotNull Vitality vitality, @Nullable String story,
+                     @NotNull Stats stats, @NotNull ArrayList<String> otherProficienciesAndLanguages, @NotNull Vitality vitality, @Nullable String story,
                      @NotNull ArrayList<String> alliesAndOrganizations, @NotNull Cult cult) {
         this.characterHeader = characterHeader;
         this.characterDescription = characterDescription;
         this.stats = stats;
+        this.otherProficienciesAndLanguages = otherProficienciesAndLanguages;
         this.vitality = vitality;
         if(story == null) this.story = "";
         else this.story = story;
@@ -39,6 +41,7 @@ public final class Character implements SheetComponent {
         this(new CharacterHeader(),
                 new CharacterDescription(),
                 new Stats(),
+                new ArrayList<>(),
                 new Vitality(),
                 null,
                 new ArrayList<>(),
@@ -48,10 +51,15 @@ public final class Character implements SheetComponent {
         characterHeader = new CharacterHeader(dndSheet);
         characterDescription = new CharacterDescription(dndSheet);
         stats = new Stats(dndSheet);
+        otherProficienciesAndLanguages = new ArrayList<>();
+        NodeList otherProficienciesAndLanguagesList = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.OtherProficienciesAndLanguages.OTHER_PROFICIENCY_OR_LANGUAGE);
+        for(int i=0;i<otherProficienciesAndLanguagesList.getLength();i++){
+            otherProficienciesAndLanguages.add(otherProficienciesAndLanguagesList.item(i).getTextContent());
+        }
         vitality = new Vitality(dndSheet);
         story = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.STORY).item(0).getTextContent();
         alliesAndOrganizations = new ArrayList<>();
-        NodeList alliesAndOrganizationList = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.ALLY_OR_ORGANIZATION);
+        NodeList alliesAndOrganizationList = dndSheet.getElementsByTagName(EasySheet.Defs.XMLElementNames.Character.AlliesAndOrganizations.ALLY_OR_ORGANIZATION);
         for(int i=0;i<alliesAndOrganizationList.getLength();i++){
             alliesAndOrganizations.add(alliesAndOrganizationList.item(i).getTextContent());
         }
@@ -70,6 +78,10 @@ public final class Character implements SheetComponent {
     @NotNull
     public Stats getStats() {
         return stats;
+    }
+    @NotNull
+    public ArrayList<String> getOtherProficienciesAndLanguages(){
+        return otherProficienciesAndLanguages;
     }
     @NotNull
     public Vitality getVitality() {
@@ -93,7 +105,32 @@ public final class Character implements SheetComponent {
     }
     @Override
     public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
-        //TODO: implement sheet component write
+        Element characterElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Character.CHARACTER);
+        characterHeader.writeComponent(dndSheet, characterElement);
+        characterDescription.writeComponent(dndSheet, characterElement);
+        stats.writeComponent(dndSheet, characterElement);
+        Element otherProficienciesAndLanguagesElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Character.OtherProficienciesAndLanguages.OTHER_PROFICIENCIES_AND_LANGUAGES);
+        Element otherProficiencyOrLanguageElement;
+        for(String otherProficiencyOrLanguage : otherProficienciesAndLanguages){
+            otherProficiencyOrLanguageElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Character.OtherProficienciesAndLanguages.OTHER_PROFICIENCY_OR_LANGUAGE);
+            otherProficiencyOrLanguageElement.setTextContent(otherProficiencyOrLanguage);
+            otherProficienciesAndLanguagesElement.appendChild(otherProficiencyOrLanguageElement);
+        }
+        characterElement.appendChild(otherProficienciesAndLanguagesElement);
+        vitality.writeComponent(dndSheet, characterElement);
+        Element storyElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Character.STORY);
+        storyElement.setTextContent(story);
+        characterElement.appendChild(storyElement);
+        Element alliesAndOrganizationsElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Character.AlliesAndOrganizations.ALLIES_AND_ORGANIZATIONS);
+        Element allyOrOrganizationElement;
+        for(String allyOrOrganization : alliesAndOrganizations){
+            allyOrOrganizationElement = dndSheet.createElement(EasySheet.Defs.XMLElementNames.Character.AlliesAndOrganizations.ALLY_OR_ORGANIZATION);
+            allyOrOrganizationElement.setTextContent(allyOrOrganization);
+            alliesAndOrganizationsElement.appendChild(allyOrOrganizationElement);
+        }
+        characterElement.appendChild(alliesAndOrganizationsElement);
+        cult.writeComponent(dndSheet, characterElement);
+        parent.appendChild(characterElement);
     }
     @Override
     public boolean equals(Object o) {
@@ -107,6 +144,7 @@ public final class Character implements SheetComponent {
         if (!getStats().equals(character.getStats())) return false;
         if (!getVitality().equals(character.getVitality())) return false;
         if (!getStory().equals(character.getStory())) return false;
+        if (!getOtherProficienciesAndLanguages().equals(character.getOtherProficienciesAndLanguages())) return false;
         if (!getAlliesAndOrganizations().equals(character.getAlliesAndOrganizations())) return false;
         return getCult().equals(character.getCult());
     }
@@ -117,6 +155,7 @@ public final class Character implements SheetComponent {
         result = 31 * result + getStats().hashCode();
         result = 31 * result + getVitality().hashCode();
         result = 31 * result + getStory().hashCode();
+        result = 31 * result + getOtherProficienciesAndLanguages().hashCode();
         result = 31 * result + getAlliesAndOrganizations().hashCode();
         result = 31 * result + getCult().hashCode();
         return result;
@@ -129,6 +168,7 @@ public final class Character implements SheetComponent {
                 ", stats=" + stats +
                 ", vitality=" + vitality +
                 ", story='" + story + '\'' +
+                ", otherProficienciesAndLanguages=" + otherProficienciesAndLanguages +
                 ", alliesAndOrganizations=" + alliesAndOrganizations +
                 ", cult=" + cult +
                 '}';

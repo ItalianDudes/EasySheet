@@ -102,7 +102,30 @@ public final class Vitality implements SheetComponent {
     }
     @Override
     public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
-        //TODO: implement sheet component write
+        Element vitalityElement = dndSheet.createElement(Character.Vitality.VITALITY);
+        AC.writeComponent(dndSheet, vitalityElement);
+        Element speedElement = dndSheet.createElement(Character.Vitality.SPEED);
+        speedElement.setTextContent(speed);
+        vitalityElement.appendChild(vitalityElement);
+        Element maxHPElement = dndSheet.createElement(Character.Vitality.MAX_HP);
+        maxHPElement.setTextContent(String.valueOf(maxHP));
+        vitalityElement.appendChild(maxHPElement);
+        Element currentHPElement = dndSheet.createElement(Character.Vitality.CURRENT_HP);
+        currentHPElement.setTextContent(String.valueOf(currentHP));
+        vitalityElement.appendChild(currentHPElement);
+        Element totalHitDiceRollElement = dndSheet.createElement(Character.Vitality.TOTAL_HIT_DICE_ROLL);
+        totalHitDiceRollElement.setTextContent(totalHitDiceRoll.toString());
+        vitalityElement.appendChild(totalHitDiceRollElement);
+        Element currentHitDiceRollElement = dndSheet.createElement(Character.Vitality.CURRENT_HIT_DICE_ROLL);
+        currentHitDiceRollElement.setTextContent(currentHitDiceRoll.toString());
+        vitalityElement.appendChild(currentHitDiceRollElement);
+        Element successDeathSavingThrowsElement = dndSheet.createElement(Character.Vitality.SUCCESS_DEATH_SAVING_THROWS);
+        successDeathSavingThrowsElement.setTextContent(String.valueOf(successDeathSavingThrows));
+        vitalityElement.appendChild(successDeathSavingThrowsElement);
+        Element failDeathSavingThrowsElement = dndSheet.createElement(Character.Vitality.FAIL_DEATH_SAVING_THROWS);
+        failDeathSavingThrowsElement.setTextContent(String.valueOf(failDeathSavingThrows));
+        vitalityElement.appendChild(failDeathSavingThrowsElement);
+        parent.appendChild(vitalityElement);
     }
     @Override
     public boolean equals(Object o) {

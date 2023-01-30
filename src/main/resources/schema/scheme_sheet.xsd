@@ -74,8 +74,7 @@
     </xs:complexType>
     <xs:complexType name="other_proficiencies_and_languages">
         <xs:sequence>
-            <xs:element name="proficiency" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="other_proficiency_or_language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="character_description">
@@ -149,6 +148,7 @@
             <xs:element name="character_header" type="character_header"/>
             <xs:element name="character_description" type="character_description"/>
             <xs:element name="stats" type="stats"/>
+            <xs:element name="other_proficiencies_and_languages" type="other_proficiencies_and_languages"/>
             <xs:element name="vitality" type="vitality"/>
             <xs:element name="story" type="xs:string"/>
             <xs:element name="allies_and_organizations" type="allies_and_organizations"/>

@@ -3,6 +3,7 @@ package it.italiandudes.easy_sheet.common.sheet;
 import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames;
 import it.italiandudes.easy_sheet.common.sheet.generic.Spell;
 import it.italiandudes.easy_sheet.common.sheet.spell_category.CasterHeader;
+import it.italiandudes.easy_sheet.common.util.ImageFX64;
 import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
@@ -73,7 +74,35 @@ public final class SpellCategory implements SheetComponent {
     }
     @Override
     public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
-        //TODO: implement sheet component write
+        Element spellCategoryElement = dndSheet.createElement(XMLElementNames.SpellCategory.SPELL_CATEGORY);
+        casterHeader.writeComponent(dndSheet, spellCategoryElement);
+        Element spellElement;
+        for(Spell spell : spells){
+            spellElement = dndSheet.createElement(XMLElementNames.SpellCategory.Spell.SPELL);
+            Element spellNameElement = dndSheet.createElement(XMLElementNames.SpellCategory.Spell.NAME);
+            spellNameElement.setTextContent(spell.getName());
+            spellElement.appendChild(spellNameElement);
+            Element spellLevelElement = dndSheet.createElement(XMLElementNames.SpellCategory.Spell.LEVEL);
+            spellLevelElement.setTextContent(String.valueOf(spell.getLevel()));
+            spellElement.appendChild(spellLevelElement);
+            if(!spell.getType().equals("")) {
+                Element spellTypeElement = dndSheet.createElement(XMLElementNames.SpellCategory.Spell.TYPE);
+                spellTypeElement.setTextContent(spell.getType());
+                spellElement.appendChild(spellTypeElement);
+            }
+            if(!spell.getDescription().equals("")){
+                Element spellDescriptionElement = dndSheet.createElement(XMLElementNames.SpellCategory.Spell.DESCRIPTION);
+                spellDescriptionElement.setTextContent(spell.getDescription());
+                spellElement.appendChild(spellDescriptionElement);
+            }
+            if(spell.getImage()!=null){
+                Element spellImageElement = dndSheet.createElement(XMLElementNames.SpellCategory.Spell.IMAGE);
+                spellImageElement.setTextContent(ImageFX64.imageToBase64(spell.getImage()));
+                spellElement.appendChild(spellImageElement);
+            }
+            spellCategoryElement.appendChild(spellElement);
+            parent.appendChild(spellCategoryElement);
+        }
     }
     @Override
     public boolean equals(Object o) {

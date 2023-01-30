@@ -127,7 +127,35 @@ public final class CharacterHeader implements SheetComponent {
     }
     @Override
     public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
-        //TODO: implement sheet component write
+        Element characterHeaderElement = dndSheet.createElement(Character.CharacterHeader.CHARACTER_HEADER);
+        Element characterNameElement = dndSheet.createElement(Character.CharacterHeader.CHARACTER_NAME);
+        characterNameElement.setTextContent(characterName);
+        characterHeaderElement.appendChild(characterNameElement);
+        Element characterClassElement = dndSheet.createElement(Character.CharacterHeader.CHARACTER_CLASS);
+        characterClassElement.setTextContent(characterClass);
+        characterHeaderElement.appendChild(characterClassElement);
+        Element levelElement = dndSheet.createElement(Character.CharacterHeader.LEVEL);
+        levelElement.setTextContent(String.valueOf(level));
+        characterHeaderElement.appendChild(levelElement);
+        Element backgroundElement = dndSheet.createElement(Character.CharacterHeader.BACKGROUND);
+        backgroundElement.setTextContent(background);
+        characterHeaderElement.appendChild(backgroundElement);
+        Element raceElement = dndSheet.createElement(Character.CharacterHeader.RACE);
+        raceElement.setTextContent(race);
+        characterHeaderElement.appendChild(raceElement);
+        Element playerNameElement = dndSheet.createElement(Character.CharacterHeader.PLAYER_NAME);
+        playerNameElement.setTextContent(playerName);
+        characterHeaderElement.appendChild(playerNameElement);
+        Element alignmentElement = dndSheet.createElement(Character.CharacterHeader.ALIGNMENT);
+        alignmentElement.setTextContent(alignment);
+        characterHeaderElement.appendChild(alignmentElement);
+        Element campaignElement = dndSheet.createElement(Character.CharacterHeader.CAMPAIGN);
+        campaignElement.setTextContent(campaign);
+        characterHeaderElement.appendChild(campaignElement);
+        Element expElement = dndSheet.createElement(Character.CharacterHeader.EXP);
+        expElement.setTextContent(String.valueOf(exp));
+        characterHeaderElement.appendChild(expElement);
+        parent.appendChild(characterHeaderElement);
     }
     @Override
     public boolean equals(Object o) {
