@@ -1,8 +1,8 @@
 package it.italiandudes.easy_sheet.common.sheet.spell_category;
 
 import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames;
-import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.SpellCategory;
+import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Document;

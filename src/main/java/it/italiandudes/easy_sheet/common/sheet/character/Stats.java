@@ -1,9 +1,9 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
 import it.italiandudes.easy_sheet.EasySheet;
+import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
 import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import org.jetbrains.annotations.NotNull;
-import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

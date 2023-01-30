@@ -1,8 +1,8 @@
 package it.italiandudes.easy_sheet.common.sheet.character;
 
+import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
 import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import it.italiandudes.easy_sheet.common.sheet.generic.DiceRoll;
-import it.italiandudes.easy_sheet.EasySheet.Defs.XMLElementNames.Character;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Document;
