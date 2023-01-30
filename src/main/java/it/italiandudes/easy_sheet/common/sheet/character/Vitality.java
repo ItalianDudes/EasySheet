@@ -106,7 +106,7 @@ public final class Vitality implements SheetComponent {
         AC.writeComponent(dndSheet, vitalityElement);
         Element speedElement = dndSheet.createElement(Character.Vitality.SPEED);
         speedElement.setTextContent(speed);
-        vitalityElement.appendChild(vitalityElement);
+        vitalityElement.appendChild(speedElement);
         Element maxHPElement = dndSheet.createElement(Character.Vitality.MAX_HP);
         maxHPElement.setTextContent(String.valueOf(maxHP));
         vitalityElement.appendChild(maxHPElement);

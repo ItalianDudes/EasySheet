@@ -101,8 +101,8 @@ public final class SpellCategory implements SheetComponent {
                 spellElement.appendChild(spellImageElement);
             }
             spellCategoryElement.appendChild(spellElement);
-            parent.appendChild(spellCategoryElement);
         }
+        parent.appendChild(spellCategoryElement);
     }
     @Override
     public boolean equals(Object o) {

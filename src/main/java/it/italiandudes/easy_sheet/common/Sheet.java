@@ -3,7 +3,6 @@ package it.italiandudes.easy_sheet.common;
 import it.italiandudes.easy_sheet.EasySheet;
 import it.italiandudes.easy_sheet.common.sheet.Character;
 import it.italiandudes.easy_sheet.common.sheet.Inventory;
-import it.italiandudes.easy_sheet.common.sheet.SheetComponent;
 import it.italiandudes.easy_sheet.common.sheet.SpellCategory;
 import it.italiandudes.easy_sheet.javafx.JFXDefs;
 import it.italiandudes.idl.common.Logger;
@@ -24,7 +23,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 @SuppressWarnings("unused")
-public final class Sheet implements SheetComponent {
+public final class Sheet {
 
     //Attributes
     @NotNull private final Character character;
@@ -83,12 +82,6 @@ public final class Sheet implements SheetComponent {
         StreamResult result;
         result = new StreamResult(Files.newOutputStream(outputSheetFile.toPath()));
         EasySheet.XML_DOCUMENT_WRITER.transform(source, result);
-    }
-    @Override
-    public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
-        character.writeComponent(dndSheet, parent);
-        inventory.writeComponent(dndSheet, parent);
-        spellCategory.writeComponent(dndSheet, parent);
     }
     @Override
     public boolean equals(Object o) {

@@ -75,12 +75,16 @@ public final class Cult implements SheetComponent {
     @Override
     public void writeComponent(@NotNull Document dndSheet, @NotNull Element parent) {
         Element cultElement = dndSheet.createElement(Character.Cult.CULT);
-        Element nameElement = dndSheet.createElement(Character.Cult.NAME);
-        nameElement.setTextContent(cultName);
-        cultElement.appendChild(nameElement);
-        Element descriptionElement = dndSheet.createElement(Character.Cult.DESCRIPTION);
-        descriptionElement.setTextContent(cultDescription);
-        cultElement.appendChild(descriptionElement);
+        if(!cultName.equals("")) {
+            Element nameElement = dndSheet.createElement(Character.Cult.NAME);
+            nameElement.setTextContent(cultName);
+            cultElement.appendChild(nameElement);
+        }
+        if(!cultDescription.equals("")) {
+            Element descriptionElement = dndSheet.createElement(Character.Cult.DESCRIPTION);
+            descriptionElement.setTextContent(cultDescription);
+            cultElement.appendChild(descriptionElement);
+        }
         if (cultImage != null) {
             Element imageElement = dndSheet.createElement(Character.Cult.IMAGE);
             imageElement.setTextContent(ImageFX64.imageToBase64(cultImage));

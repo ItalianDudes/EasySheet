@@ -1,6 +1,5 @@
 package it.italiandudes.easy_sheet;
 
-import it.italiandudes.easy_sheet.common.Sheet;
 import it.italiandudes.easy_sheet.javafx.JFXDefs;
 import it.italiandudes.easy_sheet.javafx.scene.SceneStartup;
 import it.italiandudes.idl.common.Logger;
@@ -69,18 +68,7 @@ public final class EasySheet extends Application {
             System.err.println("Logger can't be initialized. Exit...");
         }
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> Logger.log(e));
-        //launch(args);
-        testWriteXML();
-
-    }
-
-    private static void testWriteXML() {
-        Sheet sheet = new Sheet();
-        try {
-            sheet.writeSheet("sheet.xml");
-        }catch (Exception e){
-            Logger.log(e);
-        }
+        launch(args);
     }
 
     //Defs

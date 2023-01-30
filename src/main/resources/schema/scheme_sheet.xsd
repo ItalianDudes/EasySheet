@@ -3,7 +3,7 @@
     <!--Type Definitions-->
     <xs:simpleType name="dice_roll">
         <xs:restriction base="xs:string">
-            <xs:pattern value="^[0-9]+d[0-9]+$"/>
+            <xs:pattern value="[0-9]+d[0-9]+"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:complexType name="spell">
@@ -141,6 +141,8 @@
         <xs:sequence>
             <xs:element name="caster_class" type="xs:string"/>
             <xs:element name="caster_ability" type="xs:string"/>
+            <xs:element name="cd_spell_saving_throws" type="xs:integer"/>
+            <xs:element name="spell_attack_bonus" type="xs:integer"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="character">
