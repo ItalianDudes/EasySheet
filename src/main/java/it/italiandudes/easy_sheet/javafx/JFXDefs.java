@@ -33,6 +33,11 @@ public final class JFXDefs {
             private static final String FXML_DIR = "/fxml/";
             public static final String FXML_STARTUP = FXML_DIR + "SceneStartup.fxml";
             public static final String FXML_LOADING = FXML_DIR+"SceneLoading.fxml";
+            public static final String FXML_SHEET_VIEW = FXML_DIR+"SceneSheetViewer.fxml";
+            public static final class SheetSection {
+                private static final String SECTION_DIR = FXML_DIR+"sheet_section/";
+                public static final String FXML_SHEET_CHARACTER = SECTION_DIR+"SceneSheetCharacterSection.fxml";
+            }
         }
 
         //XML Scheme Locations

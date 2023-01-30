@@ -1,0 +1,15 @@
+@import "main.css";
+
+#mainPane {
+    -fx-background-color: -fx--background-color;
+}
+.clickableLabel {
+    -fx-text-fill: #000;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-border-color: black;
+    -fx-padding: 0px 5px 0px 5px;
+}
+.clickableLabel:hover {
+    -fx-text-fill: #444;
+}

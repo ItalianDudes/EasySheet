@@ -1,11 +1,14 @@
 package it.italiandudes.easy_sheet;
 
+import it.italiandudes.easy_sheet.common.Sheet;
 import it.italiandudes.easy_sheet.javafx.JFXDefs;
+import it.italiandudes.easy_sheet.javafx.scene.SceneSheetViewer;
 import it.italiandudes.easy_sheet.javafx.scene.SceneStartup;
 import it.italiandudes.idl.common.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,7 +23,7 @@ import java.io.IOException;
 @SuppressWarnings("unused")
 public final class EasySheet extends Application {
 
-    //Attributes
+    //XML Workers
     public static final DocumentBuilder XML_DOCUMENT_BUILDER;
     static {
         try {
@@ -40,7 +43,9 @@ public final class EasySheet extends Application {
         }
     }
 
+    //Attributes
     private static Stage stage = null;
+    private static Sheet sheet = new Sheet();
 
     //Start Method
     @Override
@@ -48,7 +53,8 @@ public final class EasySheet extends Application {
         EasySheet.stage = stage;
         stage.setTitle(JFXDefs.AppInfo.NAME);
         stage.getIcons().add(JFXDefs.AppInfo.LOGO);
-        stage.setScene(SceneStartup.getScene());
+        //stage.setScene(SceneStartup.getScene());
+        stage.setScene(SceneSheetViewer.getScene());
         stage.show();
     }
 
@@ -56,6 +62,13 @@ public final class EasySheet extends Application {
     @NotNull
     public static Stage getStage(){
         return stage;
+    }
+    @Nullable
+    public static Sheet getSheet(){
+        return sheet;
+    }
+    public static void setSheet(@Nullable Sheet sheet){
+        EasySheet.sheet = sheet;
     }
 
     //Main Method
@@ -69,6 +82,19 @@ public final class EasySheet extends Application {
         }
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> Logger.log(e));
         launch(args);
+    }
+
+    private static void test() {
+        try {
+            Sheet sheet1 = new Sheet();
+            sheet1.writeSheet("sheet.dndx");
+
+            Sheet sheet2 = new Sheet("sheet.dndx");
+            System.out.println(sheet2);
+        }catch (Exception e){
+            Logger.log(e);
+        }
+        System.exit(0);
     }
 
     //Defs

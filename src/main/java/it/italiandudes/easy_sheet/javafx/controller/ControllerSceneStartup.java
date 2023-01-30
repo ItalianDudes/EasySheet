@@ -1,8 +1,16 @@
 package it.italiandudes.easy_sheet.javafx.controller;
 
 import it.italiandudes.easy_sheet.EasySheet;
+import it.italiandudes.easy_sheet.common.Sheet;
 import it.italiandudes.easy_sheet.javafx.JFXDefs;
+import it.italiandudes.easy_sheet.javafx.alert.ErrorAlert;
+import it.italiandudes.easy_sheet.javafx.scene.SceneLoading;
+import it.italiandudes.easy_sheet.javafx.scene.SceneSheetViewer;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -81,11 +89,63 @@ public final class ControllerSceneStartup {
     }
     @FXML
     private void openSheet(){
-        //TODO: openSheet()
+        Scene currentScene = EasySheet.getStage().getScene();
+        EasySheet.getStage().setScene(SceneLoading.getScene());
+        Service<Void> openSheetService = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() {
+                        File sheetFileController = new File(pathSheetTextField.getText());
+                        if(!sheetFileController.exists() || !sheetFileController.isFile()){
+                            Platform.runLater(() -> {
+                                new ErrorAlert("ERRORE", "Errore durante la lettura della scheda", "Il percorso inserito non porta a nessuna scheda compatibile.");
+                                EasySheet.getStage().setScene(currentScene);
+                            });
+                            return null;
+                        }
+
+                        Sheet sheet;
+                        try{
+                            sheet = new Sheet(pathSheetTextField.getText());
+                        }catch (Exception e){
+                            Platform.runLater(() -> {
+                                new ErrorAlert("ERRORE", "Errore durante la lettura della scheda", e.getMessage());
+                                EasySheet.getStage().setScene(currentScene);
+                            });
+                            return null;
+                        }
+
+                        EasySheet.setSheet(sheet);
+
+                        Platform.runLater(() -> EasySheet.getStage().setScene(SceneSheetViewer.getScene()));
+
+                        return null;
+                    }
+                };
+            }
+        };
+        openSheetService.start();
     }
     @FXML
     private void createSheet(){
-        //TODO: createSheet()
+        Scene currentScene = EasySheet.getStage().getScene();
+        EasySheet.getStage().setScene(SceneLoading.getScene());
+        Service<Void> createSheetService = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() {
+                        EasySheet.setSheet(new Sheet());
+                        Platform.runLater(() -> EasySheet.getStage().setScene(SceneSheetViewer.getScene()));
+                        return null;
+                    }
+                };
+            }
+        };
+        createSheetService.start();
     }
 
 }
